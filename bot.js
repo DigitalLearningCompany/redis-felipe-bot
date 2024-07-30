@@ -7,7 +7,6 @@ const { BullAdapter } = require("@bull-board/api/bullAdapter");
 const { createBullBoard } = require("@bull-board/api");
 const introMessage = require("./introMessage");
 const secondMessage = require("./secondMessage");
-const thirdMessage = require("./thirdMessage");
 
 const { BOT_TOKEN, REDIS_HOST, REDIS_PORT, REDIS_PASSWORD } = process.env;
 
@@ -50,7 +49,7 @@ const worker = new Worker(
             chatId,
           },
           {
-            delay: 5 * 60 * 1000,
+            delay: 5 * 60 * 60 * 1000,
             removeOnComplete: true,
             jobId: `${chatId}-${queuePosition - 1}`,
           }
@@ -74,7 +73,7 @@ const worker = new Worker(
             username,
           },
           {
-            delay: 5 * 60 * 1000,
+            delay: 5 * 60 * 60 * 1000,
             removeOnComplete: true,
             jobId: `${chatId}-${queuePosition - 1}`,
           }
