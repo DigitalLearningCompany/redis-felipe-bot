@@ -34,10 +34,10 @@ const worker = new Worker(
       const { chatId, username } = job.data;
       if (job.name === "10-min") {
         const { followUpAfter10Min, queuePosition } = job.data;
-        const followUpAfter5h = thirdMessage(username, queuePosition);
+        const followUpAfter5h = secondMessage(username, queuePosition);
         bot.api.sendMessage(chatId, followUpAfter10Min.text, {
           reply_markup: new InlineKeyboard()
-            .url("BOTAO DE 10 MIN", "https://youtu.be/StJ_3NXtLwQ")
+            .url("QUERO AQUECER MINHA CONTA AGORA!", "https://www.google.com")
             .row(),
           entities: followUpAfter10Min.entities,
         });
@@ -58,11 +58,10 @@ const worker = new Worker(
       }
       if (job.name === "5h") {
         const { followUpAfter5h, queuePosition, username, chatId } = job.data;
-        if (queuePosition < 4) return;
-        const newMessage = thirdMessage(username, queuePosition);
+        if (queuePosition < 3) return;
         bot.api.sendMessage(chatId, newMessage.text, {
           reply_markup: new InlineKeyboard()
-            .url("BOTAO DE 20 MIN!", "https://youtu.be/StJ_3NXtLwQ")
+            .url("QUERO AQUECER MINHA CONTA AGORA!", "https://www.google.com")
             .row(),
           entities: followUpAfter5h.entities,
         });
@@ -120,7 +119,7 @@ bot.command("start", (ctx) => {
       username: ctx.chat.first_name,
     },
     {
-      delay: 60 * 1000,
+      delay: 10 * 60 * 1000,
       removeOnComplete: true,
       jobId: `${ctx.chat.id}-10min`,
     }
@@ -128,8 +127,8 @@ bot.command("start", (ctx) => {
 
   ctx.api.sendMessage(ctx.chat.id, intro.text, {
     reply_markup: new InlineKeyboard().url(
-      "Quero entrar no grupo AGORA!",
-      "https://t.me/+aQSAAQ05iUplNjNh"
+      "QUERO ENTRAR NO GRUPO VIP E RECEBER O APP!",
+      "https://www.google.com"
     ),
     entities: intro.entities,
   });
