@@ -106,7 +106,7 @@ const { addQueue, removeQueue, setQueues, replaceQueues } = createBullBoard({
 app.use("/admin/queues", serverAdapter.getRouter());
 
 bot.command("start", (ctx) => {
-  const queuePosition = 22;
+  const queuePosition = 46;
   const intro = introMessage(ctx.chat.first_name);
   const followUpAfter10Min = secondMessage(ctx.chat.first_name, queuePosition);
 
@@ -127,7 +127,7 @@ bot.command("start", (ctx) => {
 
   ctx.api.sendMessage(ctx.chat.id, intro.text, {
     reply_markup: new InlineKeyboard().url(
-      "QUERO ENTRAR NO GRUPO VIP E RECEBER O APP!",
+      "QUERO ENTRAR NA VIP E RECEBER O APP!",
       "https://www.google.com"
     ),
     entities: intro.entities,
