@@ -4,7 +4,7 @@
   "description": "",
   "main": "bot.js",
   "scripts": {
-    "start": "docker-compose up -d && node ."
+    "start": "node ."
   },
   "keywords": [],
   "author": "",
