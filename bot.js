@@ -48,7 +48,7 @@ const worker = new Worker(
             chatId,
           },
           {
-            delay: 2 * 60 * 1000,
+            delay: 5 * 60 * 60 * 1000,
             removeOnComplete: true,
             jobId: `${chatId}-${queuePosition - 1}`,
           }
@@ -73,7 +73,7 @@ const worker = new Worker(
             username,
           },
           {
-            delay: 2 * 60 * 1000,
+            delay: 5 * 60 * 60 * 1000,
             removeOnComplete: true,
             jobId: `${chatId}-${queuePosition - 1}`,
           }
@@ -118,7 +118,7 @@ bot.command("start", (ctx) => {
       username: ctx.chat.first_name,
     },
     {
-      delay: 60 * 1000,
+      delay: 10 * 60 * 1000,
       removeOnComplete: true,
       jobId: `${ctx.chat.id}-10min`,
     }
