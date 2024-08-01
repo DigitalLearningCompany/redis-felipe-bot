@@ -30,9 +30,8 @@ const worker = new Worker(
   "messages",
   (job) => {
     try {
-      const { chatId, username } = job.data;
       if (job.name === "10-min") {
-        const { followUpAfter10Min, queuePosition } = job.data;
+        const { followUpAfter10Min, queuePosition, chatId, username } = job.data;
         const followUpAfter5h = secondMessage(username, queuePosition);
         bot.api.sendMessage(chatId, followUpAfter10Min.text, {
           reply_markup: new InlineKeyboard()
@@ -105,16 +104,16 @@ const { addQueue, removeQueue, setQueues, replaceQueues } = createBullBoard({
 app.use("/admin/queues", serverAdapter.getRouter());
 
 bot.command("start", (ctx) => {
-  const queuePosition = 46;
+  const startQueueAtPosition = 46;
   const intro = introMessage(ctx.chat.first_name);
-  const followUpAfter10Min = secondMessage(ctx.chat.first_name, queuePosition);
+  const followUpAfter10Min = secondMessage(ctx.chat.first_name, startQueueAtPosition);
 
   queue.add(
     "10-min",
     {
       chatId: ctx.chat.id,
       followUpAfter10Min,
-      queuePosition,
+      queuePosition: startQueueAtPosition,
       username: ctx.chat.first_name,
     },
     {
