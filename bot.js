@@ -57,18 +57,18 @@ const worker = new Worker(
       if (job.name === "5h") {
         const { followUpAfter5h, queuePosition, username, chatId } = job.data;
         if (queuePosition < 3) return;
-        const followUpAfter5h = secondMessage(username, queuePosition);
-        bot.api.sendMessage(chatId, followUpAfter5h.text, {
+        const newFollowUpAfter5h = secondMessage(username, queuePosition);
+        bot.api.sendMessage(chatId, newFollowUpAfter5h.text, {
           reply_markup: new InlineKeyboard()
             .url("QUERO AQUECER MINHA CONTA AGORA!", "https://www.google.com")
             .row(),
-          entities: followUpAfter5h.entities,
+          entities: newFollowUpAfter5h.entities,
         });
         queue.add(
           "5h",
           {
             chatId,
-            followUpAfter5h,
+            followUpAfter5h: newFollowUpAfter5h,
             queuePosition: queuePosition - 1,
             username,
           },
