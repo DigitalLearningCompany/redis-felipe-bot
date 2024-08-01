@@ -57,6 +57,7 @@ const worker = new Worker(
       if (job.name === "5h") {
         const { followUpAfter5h, queuePosition, username, chatId } = job.data;
         if (queuePosition < 3) return;
+        const followUpAfter5h = secondMessage(username, queuePosition);
         bot.api.sendMessage(chatId, followUpAfter5h.text, {
           reply_markup: new InlineKeyboard()
             .url("QUERO AQUECER MINHA CONTA AGORA!", "https://www.google.com")
