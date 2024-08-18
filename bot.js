@@ -28,12 +28,12 @@ const queue = new Queue("messages", {
 
 const worker = new Worker(
   "messages",
-  (job) => {
+  async (job) => {
     try {
       if (job.name === "10-min") {
         const { followUpAfter10Min, queuePosition, chatId, username } = job.data;
         const followUpAfter5h = secondMessage(username, queuePosition);
-        bot.api.sendMessage(chatId, followUpAfter10Min.text, {
+        await bot.api.sendMessage(chatId, followUpAfter10Min.text, {
           reply_markup: new InlineKeyboard()
             .url("QUERO AQUECER MINHA CONTA AGORA!", "https://www.google.com")
             .row(),
@@ -58,7 +58,7 @@ const worker = new Worker(
         const { followUpAfter5h, queuePosition, username, chatId } = job.data;
         if (queuePosition < 3) return;
         const newFollowUpAfter5h = secondMessage(username, queuePosition);
-        bot.api.sendMessage(chatId, newFollowUpAfter5h.text, {
+        await bot.api.sendMessage(chatId, newFollowUpAfter5h.text, {
           reply_markup: new InlineKeyboard()
             .url("QUERO AQUECER MINHA CONTA AGORA!", "https://www.google.com")
             .row(),
